@@ -27,11 +27,12 @@ ufw allow 46123
 ufw allow 58846
 ufw allow 56000
 ufw allow 57000
+ufw allow 111
+ufw allow 2049
 echo ""
 echo -e "\e[44mSetting up NFS-Share\e[0m"
 echo "10.30.100.13:/volume1/media/import	/home/deluge/import	nfs	defaults,user,exec	0 0" >> /etc/fstab
-10.30.100.13:/volume1/media/import	/home/deluge/import	nfs4	defaults,user,exec	0 0
-
+echo ""
 echo -e "\e[44mSetting up Deluge\e[0m"
 adduser --disabled-password --gecos -u 1026 -g 102 "" deluge
 su -c 'deluged' deluge
