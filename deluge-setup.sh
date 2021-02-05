@@ -30,9 +30,7 @@ ufw allow 57000
 ufw allow 111
 ufw allow 2049
 echo ""
-echo -e "\e[44mSetting up NFS-Share\e[0m"
-echo "10.30.100.13:/volume1/media/import	/home/deluge/import	nfs	defaults,user,exec	0 0" >> /etc/fstab
-echo ""
+
 echo -e "\e[44mSetting up Deluge\e[0m"
 adduser --disabled-password --gecos -u 1026 -g 102 "" deluge
 su -c 'deluged' deluge
@@ -56,6 +54,10 @@ su -c 'deluge-console "config -s max_active_limit 100"' deluge
 su -c 'deluge-console "config -s max_active_seeding 100"' deluge
 
 systemctl restart deluged
+echo -e "\e[44mSetting up NFS-Share\e[0m"
+echo "10.30.100.13:/volume1/media/import	/home/deluge/import	nfs	defaults,user,exec	0 0" >> /etc/fstab
+su -c 'mkdir /home/deluge/import' deluge
+mount -a
 
 echo ""
 echo "Deluge is now setup"
