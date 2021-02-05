@@ -13,7 +13,7 @@ echo -e "\e[44mInstalling Packages\e[0m"
 apt-get install -qq software-properties-common -y
 add-apt-repository ppa:deluge-team/ppa -y
 apt-get update -qq
-apt-get install -qq deluged deluge-web deluge-console nfs-common -y
+apt-get install -qq deluged deluge-web deluge-console ufw nfs-common -y
 echo ""
 echo -e "\e[44mSetting up Systemd\e[0m"
 cp systemd/deluged.service /etc/systemd/system/
@@ -21,7 +21,15 @@ cp systemd/deluge-web.service /etc/systemd/system/
 echo "Done."
 systemctl daemon-reload
 echo ""
-
+echo -e "\e[44mOpening Firewall\e[0m"
+ufw allow 8112
+ufw allow 46123
+ufw allow 58846
+ufw allow 56000
+ufw allow 57000
+ufw allow 111
+ufw allow 2049
+echo ""
 echo -e "\e[44mSetting up Deluge\e[0m"
 adduser --disabled-password --gecos "" --uid 1026 --gid 102 deluge
 su -c 'deluged' deluge
