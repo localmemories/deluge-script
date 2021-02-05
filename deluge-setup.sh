@@ -32,7 +32,7 @@ ufw allow 2049
 echo ""
 
 echo -e "\e[44mSetting up Deluge\e[0m"
-adduser --disabled-password --gecos "" -u 1026 -g 102 deluge
+adduser --disabled-password --gecos "" --uid 1026 --gid 102 deluge
 su -c 'deluged' deluge
 sleep 5
 pkill -9 deluged
